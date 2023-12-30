@@ -2,7 +2,7 @@
 using System.Linq;
 using Metalama.Framework.Aspects;
 
-namespace DisposingLama.Old
+namespace Mefitihe.LamaHerd.Disposer.Imp
 {
     [RunTimeOrCompileTime]
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]

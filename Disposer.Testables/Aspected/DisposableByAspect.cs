@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DisposingLama;
+using Mefitihe.LamaHerd.Disposer;
 
 namespace Disposer.Testables.Aspected
 {

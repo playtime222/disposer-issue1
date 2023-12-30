@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace DisposingLama.Old
+namespace Mefitihe.LamaHerd.Disposer.Imp
 {
     [Flags]
     public enum ObjectDisposedExceptionThrowers

@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using DisposingLama.Old.Actions;
 using Metalama.Framework.Aspects;
-using Metalama.Framework.Code;
-using Playtime222.PostsharpAspects.Disposer.Actions;
-using Playtime222.PostsharpAspects.Disposer.Implementation;
 
 //using System.CodeDom;
 
 //using DisposingLama.Old;
 //using DisposingLama.Old.Actions;
 
-namespace DisposingLama.Old
+namespace Mefitihe.LamaHerd.Disposer.Imp
 {
 
     [RunTimeOrCompileTime]

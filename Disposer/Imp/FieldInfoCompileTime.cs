@@ -5,7 +5,7 @@ using Metalama.Framework.Code;
 
 //using PostSharp.Reflection;
 
-namespace DisposingLama.Old
+namespace Mefitihe.LamaHerd.Disposer.Imp
 {
     [CompileTime]
     public class FieldInfoCompileTime
@@ -20,7 +20,7 @@ namespace DisposingLama.Old
         public bool ExcludedByAttribute { get; set; }
         public bool Excluded => ExcludedNonPrivate || ExcludedByAttribute;
         public int Order { get; set; }
-        public TemplateInvocation Template { get; set; }
+        public TemplateInvocation? Template { get; set; }
         public bool Included => !Excluded && Template != null;
     }
 }

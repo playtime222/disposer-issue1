@@ -1,20 +1,13 @@
 ﻿using System;
-using DisposingLama.Old;
 using System.Linq;
+using Mefitihe.LamaHerd.Disposer.Imp;
 using Metalama.Framework.Aspects;
 using Metalama.Framework.Code;
 using Metalama.Framework.Eligibility;
-using Playtime222.PostsharpAspects.Disposer.Implementation;
-using System.Net.NetworkInformation;
 
-namespace DisposingLama
+namespace Mefitihe.LamaHerd.Disposer
 {
-    //public abstract class NotAnAspect : TypeAspect
-    //{
-    //    protected virtual void Dispose(bool disposing) { }
-    //}
-
-    public class DisposerDescendentAttribute : TypeAspect //NotAnAspect
+    public class DisposerDescendentAttribute : TypeAspect
     {
         public override void BuildAspect(IAspectBuilder<INamedType> builder)
         {
@@ -34,12 +27,15 @@ namespace DisposingLama
         [Introduce]
         private bool _Disposed;
 
+        [Introduce]
+        private bool _DescendentCanary;
+
         public override void BuildEligibility(IEligibilityBuilder<INamedType> builder)
         {
             base.BuildEligibility(builder);
 
-            builder.DeclaringType().MustSatisfy(t => !t.IsStatic, t => $"{t.Description} is static.");
-            builder.DeclaringType().MustSatisfy(t => !t.ImplementedInterfaces.Contains(typeof(IDisposable)), t => $"{t.Description} implements IDisposable.");
+            builder.DeclaringType().MustSatisfy(t => !t.IsStatic, t => $"{t.Description} cannot be static.");
+            builder.DeclaringType().MustSatisfy(t => !t.ImplementedInterfaces.Contains(typeof(IDisposable)), t => $"{t.Description} cannot directly implement IDisposable.");
             builder.DeclaringType().MustSatisfy(t => t.BaseType != null && t.BaseType.AllImplementedInterfaces.Contains(typeof(IDisposable)), t => $"{t.Description} base type does not implement IDisposable.");
         }
 

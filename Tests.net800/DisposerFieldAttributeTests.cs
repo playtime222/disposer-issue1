@@ -1,6 +1,4 @@
-﻿
-using DisposingLama.Old;
-using Playtime222.PostsharpAspects.Disposer;
+﻿using Mefitihe.LamaHerd.Disposer.Imp;
 using Xunit;
 
 namespace Disposer.Tests

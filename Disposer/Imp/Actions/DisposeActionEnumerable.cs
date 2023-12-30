@@ -1,11 +1,10 @@
-﻿using Metalama.Framework.Aspects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using Metalama.Framework.Aspects;
 using Metalama.Framework.Code;
 
-namespace DisposingLama.Old.Actions
+namespace Mefitihe.LamaHerd.Disposer.Imp.Actions
 {
     [CompileTime]
     public class DisposeActionEnumerable : IDisposeAction

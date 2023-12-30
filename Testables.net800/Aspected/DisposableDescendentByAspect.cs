@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DisposingLama;
-using Playtime222.PostsharpAspects.Disposer;
+using Mefitihe.LamaHerd.Disposer;
 
 namespace Disposer.Testables.Aspected
 {

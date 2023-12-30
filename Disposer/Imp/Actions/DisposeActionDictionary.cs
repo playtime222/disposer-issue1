@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using DisposingLama.Old;
+using System.Linq;
 using Metalama.Framework.Aspects;
 using Metalama.Framework.Code;
-using Playtime222.PostsharpAspects.Disposer.Implementation;
 
-namespace Playtime222.PostsharpAspects.Disposer.Actions
+namespace Mefitihe.LamaHerd.Disposer.Imp.Actions
 {
     [CompileTime]
     public class DisposeActionDictionary : IDisposeAction

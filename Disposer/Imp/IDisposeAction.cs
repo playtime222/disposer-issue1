@@ -1,8 +1,9 @@
-﻿using Metalama.Framework.Aspects;
+﻿using System;
+using System.Linq;
+using Metalama.Framework.Aspects;
 using Metalama.Framework.Code;
-using System.ComponentModel.Design;
 
-namespace DisposingLama.Old;
+namespace Mefitihe.LamaHerd.Disposer.Imp;
 
 [CompileTime]
 public interface IDisposeAction : ITemplateProvider

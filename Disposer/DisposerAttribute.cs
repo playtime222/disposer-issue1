@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
-using DisposingLama.Old;
+using Mefitihe.LamaHerd.Disposer.Imp;
 using Metalama.Framework.Aspects;
 using Metalama.Framework.Code;
 using Metalama.Framework.Eligibility;
-using Playtime222.PostsharpAspects.Disposer.Implementation;
 
-namespace DisposingLama;
+namespace Mefitihe.LamaHerd.Disposer;
 
 public class DisposerAttribute : TypeAspect
 {
@@ -46,9 +45,8 @@ public class DisposerAttribute : TypeAspect
     }
 
     [Introduce]
-    protected virtual void Liar(bool disposing)
-    { 
-    }
+    private bool _DisposerCanary;
+
 
     [Introduce(WhenExists = OverrideStrategy.New, Name = "Dispose")]
     protected virtual void Dispose(bool disposing)

@@ -1,13 +1,11 @@
-﻿using Metalama.Framework.Aspects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mefitihe.LamaHerd.Disposer.Imp.Actions;
+using Metalama.Framework.Aspects;
 using Metalama.Framework.Code;
-using DisposingLama.Old;
-using DisposingLama.Old.Actions;
-using Playtime222.PostsharpAspects.Disposer.Actions;
 
-namespace Playtime222.PostsharpAspects.Disposer.Implementation
+namespace Mefitihe.LamaHerd.Disposer.Imp
 {
     [CompileTime]
     public class DisposeTemplateSelector

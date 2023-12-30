@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Metalama.Framework.Aspects;
 using Metalama.Framework.Code;
 
-namespace DisposingLama.Old.Actions;
+namespace Mefitihe.LamaHerd.Disposer.Imp.Actions;
 
 [CompileTime]
 public class DisposeActionDefault : IDisposeAction
