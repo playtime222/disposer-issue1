@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Disposer", "Disposer\Disposer.csproj", "{FADC8990-71ED-48CC-A4A2-B35D202E3D0B}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Disposer.Testables", "Disposer.Testables\Disposer.Testables.shproj", "{D29D3BD4-414A-40F4-B9AB-5BC4F1019FD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Disposer.Tests.net800", "Disposer.Tests.net800\Disposer.Tests.net800.csproj", "{B0FBE90E-541A-4679-888E-1AF253FD5D61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Disposer.Testables.net800", "Disposer.Testables.net800\Disposer.Testables.net800.csproj", "{BDD8A749-A1D5-44A4-9312-DD5BCD501DE5}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Disposer.Tests", "Disposer.Tests\Disposer.Tests.shproj", "{86A832E6-0D76-4DB2-B0F4-3A4EA7572CA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Copied", "Copied", "{DF8561D7-BBD2-4BA4-A02B-7E7AE785C636}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testables.net800", "Testables.net800\Testables.net800.csproj", "{E238FB9F-A5BB-4968-BDE9-6918C3082163}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.net800", "Tests.net800\Tests.net800.csproj", "{BF3ED332-B9C2-4B66-9444-86916CAECD8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		LamaDebug|Any CPU = LamaDebug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FADC8990-71ED-48CC-A4A2-B35D202E3D0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADC8990-71ED-48CC-A4A2-B35D202E3D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FADC8990-71ED-48CC-A4A2-B35D202E3D0B}.LamaDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADC8990-71ED-48CC-A4A2-B35D202E3D0B}.LamaDebug|Any CPU.Build.0 = Debug|Any CPU
+		{FADC8990-71ED-48CC-A4A2-B35D202E3D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FADC8990-71ED-48CC-A4A2-B35D202E3D0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0FBE90E-541A-4679-888E-1AF253FD5D61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0FBE90E-541A-4679-888E-1AF253FD5D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0FBE90E-541A-4679-888E-1AF253FD5D61}.LamaDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0FBE90E-541A-4679-888E-1AF253FD5D61}.LamaDebug|Any CPU.Build.0 = Debug|Any CPU
+		{B0FBE90E-541A-4679-888E-1AF253FD5D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0FBE90E-541A-4679-888E-1AF253FD5D61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDD8A749-A1D5-44A4-9312-DD5BCD501DE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDD8A749-A1D5-44A4-9312-DD5BCD501DE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDD8A749-A1D5-44A4-9312-DD5BCD501DE5}.LamaDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDD8A749-A1D5-44A4-9312-DD5BCD501DE5}.LamaDebug|Any CPU.Build.0 = Debug|Any CPU
+		{BDD8A749-A1D5-44A4-9312-DD5BCD501DE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDD8A749-A1D5-44A4-9312-DD5BCD501DE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E238FB9F-A5BB-4968-BDE9-6918C3082163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E238FB9F-A5BB-4968-BDE9-6918C3082163}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E238FB9F-A5BB-4968-BDE9-6918C3082163}.LamaDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E238FB9F-A5BB-4968-BDE9-6918C3082163}.LamaDebug|Any CPU.Build.0 = Debug|Any CPU
+		{E238FB9F-A5BB-4968-BDE9-6918C3082163}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E238FB9F-A5BB-4968-BDE9-6918C3082163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF3ED332-B9C2-4B66-9444-86916CAECD8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF3ED332-B9C2-4B66-9444-86916CAECD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF3ED332-B9C2-4B66-9444-86916CAECD8F}.LamaDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF3ED332-B9C2-4B66-9444-86916CAECD8F}.LamaDebug|Any CPU.Build.0 = Debug|Any CPU
+		{BF3ED332-B9C2-4B66-9444-86916CAECD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF3ED332-B9C2-4B66-9444-86916CAECD8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E238FB9F-A5BB-4968-BDE9-6918C3082163} = {DF8561D7-BBD2-4BA4-A02B-7E7AE785C636}
+		{BF3ED332-B9C2-4B66-9444-86916CAECD8F} = {DF8561D7-BBD2-4BA4-A02B-7E7AE785C636}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC78A1EF-DB9C-41A1-9E3B-20DA31664BF3}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Disposer.Tests\Disposer.Tests.projitems*{86a832e6-0d76-4db2-b0f4-3a4ea7572ca8}*SharedItemsImports = 13
+		Disposer.Tests\Disposer.Tests.projitems*{b0fbe90e-541a-4679-888e-1af253fd5d61}*SharedItemsImports = 5
+		Disposer.Testables\Disposer.Testables.projitems*{bdd8a749-a1d5-44a4-9312-dd5bcd501de5}*SharedItemsImports = 5
+		Disposer.Testables\Disposer.Testables.projitems*{d29d3bd4-414a-40f4-b9ab-5bc4f1019fd9}*SharedItemsImports = 13
+	EndGlobalSection
+EndGlobal
