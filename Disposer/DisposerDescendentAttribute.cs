@@ -27,8 +27,8 @@ namespace Mefitihe.LamaHerd.Disposer
         [Introduce]
         private bool _Disposed;
 
-        [Introduce]
-        private bool _DescendentCanary;
+        // [Introduce]
+        // private bool _DescendentCanary;
 
         public override void BuildEligibility(IEligibilityBuilder<INamedType> builder)
         {
@@ -40,7 +40,7 @@ namespace Mefitihe.LamaHerd.Disposer
         }
 
         [Introduce(Accessibility = Accessibility.Protected, 
-            IsVirtual = true, 
+            //IsVirtual = true, 
             //WhenInherited = OverrideStrategy.Override,
             WhenExists = OverrideStrategy.Override,
             Name ="Dispose")]
@@ -56,6 +56,8 @@ namespace Mefitihe.LamaHerd.Disposer
 
             //Disposable Instance fields
             var disposableFields = GetDisposableFields();
+
+            meta.InsertComment($"Disposing {disposableFields.Length} fields...");
 
             foreach (var f in disposableFields)
             {

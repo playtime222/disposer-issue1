@@ -29,8 +29,8 @@ public class DisposerAttribute : TypeAspect
     [Introduce]
     private bool _Disposed;
 
-    [Introduce(Accessibility = Accessibility.Public, IsVirtual = false, WhenExists = OverrideStrategy.Override, Name = "Dispose")]
-    public void Dispose2()
+    [Introduce(Accessibility = Accessibility.Public, IsVirtual = false, WhenExists = OverrideStrategy.Override, Name ="Dispose")]
+    public void DisposeImp()
     {
         Dispose(true);
         GC.SuppressFinalize(meta.This);
@@ -44,31 +44,36 @@ public class DisposerAttribute : TypeAspect
             t => $"{t.Description} must implement IDisposable.");
     }
 
-    [Introduce]
-    private bool _DisposerCanary;
+    //[Introduce]
+    //private bool _DisposerCanary;
 
 
-    [Introduce(WhenExists = OverrideStrategy.New, Name = "Dispose")]
+    [Introduce(WhenExists = OverrideStrategy.Fail, Name = "Dispose")]
     protected virtual void Dispose(bool disposing)
     {
         if (_Disposed)
             return;
 
-        if (!disposing)
-            return;
+        if (disposing)
+        { 
+            //Disposable Instance fields
+            var disposableFields = meta.Target.Type.Fields
+                .Select(DoField)
+                .Where(x => x.Included)
+                .OrderBy(x => x.Order)
+                .ThenBy(x => x.Field.Name)
+                .ToArray();
 
-        //Disposable Instance fields
-        var disposableFields = meta.Target.Type.Fields
-            .Select(DoField)
-            .Where(x => x.Included)
-            .OrderBy(x => x.Order)
-            .ThenBy(x => x.Field.Name)
-            .ToArray();
+            meta.InsertComment($"Disposing {disposableFields.Length} fields...");
 
-        foreach(var f in disposableFields)
-        {
-            meta.InvokeTemplate(f.Template);
+            foreach (var f in disposableFields)
+            {
+                meta.InvokeTemplate(f.Template);
+            }
+
         }
+
+        meta.InsertComment($"Disposer aspect does not support Finalizers.");
 
         _Disposed = true;
     }

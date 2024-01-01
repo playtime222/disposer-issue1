@@ -6,7 +6,7 @@ namespace Disposer.Testables.Aspected
 {
 
     [DisposerDescendent]
-    public class DisposableDescendentByAspect : DisposableByAspect, ITestableDisposableDescendent
+    public partial class DisposableDescendentByAspect : DisposableByAspect, ITestableDisposableDescendent
     {
         public DisposableDescendentByAspect(FakeDisposable disposable, HashSet<IDisposable> disposableHashSet, IReadOnlyDictionary<int, IDisposable> disposableRoDic) : base(disposable, disposableHashSet, disposableRoDic)
         {

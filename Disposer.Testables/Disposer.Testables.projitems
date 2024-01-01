@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Aspected\DisposableDescendentByAspect.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aspected\DisposableDescendentByAspect2.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aspected\Nothing.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyAttributes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FakeDisposable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aspected\ThrowIfDisposedTestable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HandCoded\HandCodedDisposable.cs" />
