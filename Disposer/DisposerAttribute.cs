@@ -14,7 +14,7 @@ public class DisposerAttribute : TypeAspect
         base.BuildAspect(builder);
         builder.Target.Methods
             .Where(y => !y.IsStatic && y.Accessibility != Accessibility.Private && y.Name != nameof(IDisposable.Dispose))
-            .ForEach(y => builder.Advice.Override(y, nameof(this.ThrowIfDisposed)));
+            .ForEach(y => builder.Advice.Override(y, nameof(ThrowIfDisposed)));
     }
 
     [Template]
