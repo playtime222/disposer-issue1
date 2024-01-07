@@ -39,10 +39,15 @@ namespace Disposer.Testables.Aspected
 
         public int MethodWithNullCheck86(object ion)
         {
-            if (ion == null)
-                throw new ArgumentNullException(nameof(ion));
+            ArgumentNullException.ThrowIfNull(ion);
+            //if (ion == null)
+            //    throw new ArgumentNullException(nameof(ion));
 
             return 86;
+        }
+
+        public void MethodAspectOrder(object obj)
+        {
         }
 
         public void Dispose()

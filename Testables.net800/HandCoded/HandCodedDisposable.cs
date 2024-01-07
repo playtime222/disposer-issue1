@@ -48,6 +48,11 @@ namespace Disposer.Testables.HandCoded
             }
         }
 
+        public void Method(object obj)
+        {
+            //throw new NotImplementedException();
+        }
+
         public int Method42()
         {
             if (Disposed)

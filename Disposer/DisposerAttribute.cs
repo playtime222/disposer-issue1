@@ -7,23 +7,25 @@ using Metalama.Framework.Eligibility;
 
 namespace Mefitihe.LamaHerd.Disposer;
 
-public class DisposerAttribute : TypeAspect
+public class ThrowIfDisposed : OverrideMethodAspect
 {
-    public override void BuildAspect(IAspectBuilder<INamedType> builder)
-    {
-        base.BuildAspect(builder);
-        builder.Target.Methods
-            .Where(y => !y.IsStatic && y.Accessibility != Accessibility.Private && y.Name != nameof(IDisposable.Dispose))
-            .ForEach(y => builder.Advice.Override(y, nameof(ThrowIfDisposed)));
-    }
-
-    [Template]
-    private dynamic? ThrowIfDisposed()
+    public override dynamic? OverrideMethod()
     {
         if (meta.This._Disposed)
             throw new ObjectDisposedException(meta.This.ToString());
 
         return meta.Proceed();
+    }
+}
+
+public class DisposerAttribute : TypeAspect
+{
+    public override void BuildAspect(IAspectBuilder<INamedType> builder)
+    {
+        base.BuildAspect(builder);
+        builder.Outbound.SelectMany(t => t.Methods
+            .Where(y => !y.IsStatic && y.Accessibility != Accessibility.Private && y.Name != nameof(IDisposable.Dispose)))
+            .AddAspectIfEligible<ThrowIfDisposed>();
     }
 
     [Introduce]

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Mefitihe.LamaHerd.Disposer;
+using Metalama.Framework.Aspects;
+using Metalama.Patterns.Contracts;
 
 namespace Disposer.Testables.Aspected
 {
@@ -19,6 +21,10 @@ namespace Disposer.Testables.Aspected
             _DisposableHashSet = disposableHashSet;
             _DisposableRoDic = disposableRoDic;
             _Disposable = disposable;
+        }
+
+        public void Method([Required]object obj)
+        {
         }
 
         public int Property21

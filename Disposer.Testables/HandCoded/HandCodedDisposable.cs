@@ -66,5 +66,9 @@ namespace Disposer.Testables.HandCoded
 
             return 86;
         }
+
+        public void MethodAspectOrder(object obj)
+        {
+        }
     }
 }

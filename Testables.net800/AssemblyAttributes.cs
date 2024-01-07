@@ -1,5 +1,5 @@
-﻿using Mefitihe.LamaHerd.Disposer;
+﻿using System.ComponentModel.DataAnnotations;
+using Mefitihe.LamaHerd.Disposer;
 using Metalama.Framework.Aspects;
 
-//[assembly:AspectOrder(typeof(DisposerAttribute), typeof(DisposerDescendentAttribute))]
-[assembly: AspectOrder(typeof(DisposerDescendentAttribute), typeof(DisposerAttribute))]
+[assembly: AspectOrder(typeof(ThrowIfDisposed), typeof(RequiredAttribute))]

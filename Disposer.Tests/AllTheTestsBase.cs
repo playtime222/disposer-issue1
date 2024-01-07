@@ -29,6 +29,13 @@ namespace Disposer.Tests
         }
 
         [Fact]
+        public void Order()
+        {
+            var target = Create();
+            Assert.Throws<ArgumentNullException>(() => target.MethodAspectOrder(null));
+        }
+
+        [Fact]
         public void NoThrow22()
         {
             var target = CreateDescendent();
