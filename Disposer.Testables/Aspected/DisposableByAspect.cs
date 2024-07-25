@@ -4,7 +4,7 @@ using Mefitihe.LamaHerd.Disposer;
 
 namespace Disposer.Testables.Aspected
 {
-    [Disposer]
+    [Disposable]
     public class DisposableByAspect : ITestableDisposable
     {
         private int _Property21 = 21;

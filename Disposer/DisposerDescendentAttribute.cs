@@ -18,17 +18,11 @@ public class DisposerDescendentAttribute : TypeAspect
     [Template]
     private dynamic? ThrowIfDisposed()
     {
-        if (meta.This._Disposed)
+        if (meta.This.IsDisposed)
             throw new ObjectDisposedException(meta.This.ToString());
 
         return meta.Proceed();
     }
-
-    [Introduce]
-    private bool _Disposed;
-
-    // [Introduce]
-    // private bool _DescendentCanary;
 
     public override void BuildEligibility(IEligibilityBuilder<INamedType> builder)
     {
@@ -46,25 +40,20 @@ public class DisposerDescendentAttribute : TypeAspect
         Name ="Dispose")]
     protected void Dispose(bool disposing)
     {
-        meta.Base.Dispose(disposing);
-
-        if (meta.This._Disposed)
-            return;
-
-        if (!disposing)
-            return;
-
-        //Disposable Instance fields
-        var disposableFields = GetDisposableFields();
-
-        meta.InsertComment($"Disposing {disposableFields.Length} fields...");
-
-        foreach (var f in disposableFields)
+        if (disposing)
         {
-            meta.InvokeTemplate(f.Template);
+            //Disposable Instance fields
+            var disposableFields = GetDisposableFields();
+
+            meta.InsertComment($"Disposing {disposableFields.Length} fields...");
+
+            foreach (var f in disposableFields)
+            {
+                meta.InvokeTemplate(f.Template);
+            }
         }
 
-        meta.This._Disposed = true;
+        meta.Base.Dispose(disposing);
     }
 
     private static FieldInfoCompileTime[] GetDisposableFields()
@@ -77,7 +66,6 @@ public class DisposerDescendentAttribute : TypeAspect
             .ToArray();
     }
 
-
     private static FieldInfoCompileTime DoField(IField field)
     {
         var result = new FieldInfoCompileTime(field);
@@ -85,12 +73,13 @@ public class DisposerDescendentAttribute : TypeAspect
         if (result.Excluded)
             return result;
 
-        var attribute = field.Attributes
-            .OfType<DisposerFieldAttribute>()
-            .SingleOrDefault() ?? DisposerFieldAttribute.Default;
+        result.ExcludedByAttribute = field.Attributes.Any(x => x.Type.Is(typeof(DisposerExcludeAttribute)));
 
-        result.ExcludedByAttribute = attribute.Excluded;
-        result.Order = attribute.Order;
+        var order = (int?)field.Attributes
+            .OfAttributeType(typeof(DisposerOrderAttribute))
+            .SingleOrDefault()?.NamedArguments[nameof(DisposerOrderAttribute.Order)].Value;
+
+        result.Order = order ?? DisposerOrderAttribute.Default;
 
         if (result.Excluded)
             return result;

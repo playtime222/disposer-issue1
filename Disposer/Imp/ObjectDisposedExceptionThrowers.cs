@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Metalama.Framework.Aspects;
+using System;
 using System.Linq;
 
 namespace Mefitihe.LamaHerd.Disposer.Imp;
 
+[CompileTime]
 [Flags]
 public enum ObjectDisposedExceptionThrowers
 {

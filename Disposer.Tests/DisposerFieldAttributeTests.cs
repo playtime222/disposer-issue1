@@ -1,4 +1,5 @@
-﻿using Mefitihe.LamaHerd.Disposer.Imp;
+﻿using Mefitihe.LamaHerd.Disposer;
+using Mefitihe.LamaHerd.Disposer.Imp;
 using Xunit;
 
 namespace Disposer.Tests
@@ -9,23 +10,14 @@ namespace Disposer.Tests
         [Fact]
         public void CtorDefaults()
         {
-            var actual = new DisposerFieldAttribute();
-            Assert.Equal(false, actual.Excluded);
-            Assert.Equal(1000, actual.Order);
-        }
-
-        [Fact]
-        public void Default()
-        {
-            Assert.Equal(false, DisposerFieldAttribute.Default.Excluded);
-            Assert.Equal(1000, DisposerFieldAttribute.Default.Order);
+            var actual = new DisposerOrderAttribute();
+            Assert.Equal(DisposerOrderAttribute.Default, actual.Order);
         }
 
         [Fact]
         public void Ctor()
         {
-            var actual = new DisposerFieldAttribute {Excluded = true, Order =  999};
-            Assert.Equal(true, actual.Excluded);
+            var actual = new DisposerOrderAttribute { Order =  999};
             Assert.Equal(999, actual.Order);
         }
     }

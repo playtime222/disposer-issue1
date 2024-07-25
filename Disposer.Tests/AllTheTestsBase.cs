@@ -22,10 +22,9 @@ namespace Disposer.Tests
         public void Throw42()
         {
             var target = Create();
+            target.Method42();
             target.Dispose();
-            Assert.Throws<ObjectDisposedException>(
-                () => target.Method42()
-            );
+            Assert.Throws<ObjectDisposedException>(() => target.Method42());
         }
 
         [Fact]
@@ -48,9 +47,7 @@ namespace Disposer.Tests
             var target = CreateDescendent();
             target.DescendentMethod22();
             target.Dispose();
-            Assert.Throws<ObjectDisposedException>(
-                () => target.DescendentMethod22()
-            );
+            Assert.Throws<ObjectDisposedException>(() => target.DescendentMethod22());
         }
 
         [Fact]
