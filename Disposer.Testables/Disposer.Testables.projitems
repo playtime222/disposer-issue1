@@ -9,10 +9,13 @@
     <Import_RootNamespace>Disposer.Testables</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Aspected\AddDisposableFabric.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aspected\DisposableByAspect.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aspected\DisposableDescendentByAspect.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aspected\DisposableDescendentByAspect2.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aspected\Left.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aspected\Nothing.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Aspected\Right.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyAttributes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FakeDisposable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Aspected\ThrowIfDisposedTestable.cs" />

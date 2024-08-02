@@ -31,7 +31,7 @@ namespace Disposer.Tests
         public void Order()
         {
             var target = Create();
-            Assert.Throws<ArgumentNullException>(() => target.MethodAspectOrder(null));
+            Assert.Throws<ArgumentNullException>(() => target.MethodAspectOrder(null!));
         }
 
         [Fact]

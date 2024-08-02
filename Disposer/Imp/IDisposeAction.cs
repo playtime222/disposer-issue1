@@ -9,6 +9,6 @@ namespace Mefitihe.LamaHerd.Disposer.Imp;
 public interface IDisposeAction : ITemplateProvider
 {
     int EvaluationOrder { get; }
-    bool CanKill(IField field);
-    TemplateInvocation GetTemplateInvocation(IField field);
+    bool CanKill(IFieldOrProperty field);
+    TemplateInvocation GetTemplateInvocation(IFieldOrProperty field);
 }

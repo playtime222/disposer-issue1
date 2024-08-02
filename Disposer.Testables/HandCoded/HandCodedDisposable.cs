@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Mefitihe.LamaHerd.Disposer;
+using System;
 using System.Collections.Generic;
 
 namespace Disposer.Testables.HandCoded
 {
+    [DisposerExclude]
     public class HandCodedDisposable : ITestableDisposable
     {
         private int _Property21 = 21;
-        protected bool Disposed { get; private set; }
+        protected bool IsDisposed { get; private set; }
 
         private readonly FakeDisposable _Disposable;
         private readonly HashSet<IDisposable> _DisposableHashSet;
@@ -26,7 +28,7 @@ namespace Disposer.Testables.HandCoded
             if (disposing)
             {
                 Disposable?.Dispose();
-                Disposed = true;
+                IsDisposed = true;
             }
         }
 
@@ -41,7 +43,7 @@ namespace Disposer.Testables.HandCoded
             get => _Property21;
             set
             {
-                if (Disposed)
+                if (IsDisposed)
                     throw new ObjectDisposedException(ToString());
 
                 _Property21 = value; 
@@ -50,7 +52,7 @@ namespace Disposer.Testables.HandCoded
 
         public int Method42()
         {
-            if (Disposed)
+            if (IsDisposed)
                 throw new ObjectDisposedException(ToString());
 
             return 42;
@@ -61,7 +63,7 @@ namespace Disposer.Testables.HandCoded
             if (ion == null)
                 throw new ArgumentNullException(nameof(ion));
 
-            if (Disposed)
+            if (IsDisposed)
                 throw new ObjectDisposedException(ToString());
 
             return 86;

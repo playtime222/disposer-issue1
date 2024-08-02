@@ -10,13 +10,13 @@ namespace Mefitihe.LamaHerd.Disposer.Imp;
 [CompileTime]
 public class FieldInfoCompileTime
 {
-    public FieldInfoCompileTime(IField field)
+    public FieldInfoCompileTime(IFieldOrProperty field)
     {
-        Field = field ?? throw new ArgumentNullException();
+        Field = field ?? throw new ArgumentNullException(nameof(field));
     }
 
-    public IField Field { get; }
-    public bool ExcludedNonPrivate => !Field.Accessibility.HasFlag(Accessibility.Private);
+    public IFieldOrProperty Field { get; }
+    private bool ExcludedNonPrivate => Field.Accessibility != Accessibility.Private;
     public bool ExcludedByAttribute { get; set; }
     public bool Excluded => ExcludedNonPrivate || ExcludedByAttribute;
     public int Order { get; set; }

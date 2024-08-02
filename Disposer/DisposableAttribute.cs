@@ -7,6 +7,10 @@ using Metalama.Framework.Eligibility;
 
 namespace Mefitihe.LamaHerd.Disposer;
 
+/// <summary>
+/// Cast with a fabric
+/// </summary>
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
 public class DisposableAttribute : TypeAspect
 {
     public ObjectDisposedExceptionThrowers Throwers { get; set; } = ObjectDisposedExceptionThrowers.Default;
@@ -14,15 +18,13 @@ public class DisposableAttribute : TypeAspect
     public override void BuildAspect(IAspectBuilder<INamedType> builder)
     {
         base.BuildAspect(builder);
-        builder.Outbound.SelectMany(t => t.Methods
-            .Where(y => !y.IsStatic && y.Accessibility != Accessibility.Private && y.Name != nameof(IDisposable.Dispose)))
-            .AddAspectIfEligible<ThrowIfDisposed>();
+        builder.Outbound.AddThrowIfDisposed(Throwers);
     }
 
-    [Introduce(Accessibility = Accessibility.Public, IsVirtual = false, WhenExists = OverrideStrategy.Override, Name = "Dispose")]
-    public void DisposeImp()
+    [Introduce(Name = nameof(IDisposable.Dispose), WhenExists = OverrideStrategy.Override)]
+    public void Dispose()
     {
-        Dispose(true);
+        meta.This.Dispose(true);
         GC.SuppressFinalize(meta.This);
     }
 
@@ -32,57 +34,28 @@ public class DisposableAttribute : TypeAspect
     public override void BuildEligibility(IEligibilityBuilder<INamedType> builder)
     {
         base.BuildEligibility(builder);
-        builder.DeclaringType().MustSatisfy(t => !t.IsStatic, t => $"{t.Description} is static.");
-        builder.DeclaringType().MustSatisfy(t => !t.ImplementedInterfaces.Contains(typeof(IDisposable)) || t.ImplementedInterfaces.Any(z => z.AllImplementedInterfaces.Contains(typeof(IDisposable))),
-            t => $"{t.Description} must not implement IDisposable.");
+        builder.MustSatisfy(t => t.TypeKind == TypeKind.Class, t => $"{t.Description} must be a class.");
+        builder.MustSatisfy(t => !t.IsStatic, t => $"{t.Description} cannot be static.");
+        builder.MustSatisfy(t => t.ImplementedInterfaces.Any(u => u.Is(typeof(IDisposable))), t => $"{t.Description} WIBBLE must directly implement IDisposable.");
+        //builder.DeclaringType().MustSatisfy(t => t.BaseType != null && t.BaseType.AllImplementedInterfaces.Contains(typeof(IDisposable)), t => $"{t.Description} base type does not implement IDisposable.");
     }
 
-    [Introduce(WhenExists = OverrideStrategy.Fail, Name = "Dispose")]
-    protected virtual void Dispose(bool disposing)
+    [Introduce(Name = "Dispose", IsVirtual = true, Accessibility = Accessibility.Protected, WhenExists = OverrideStrategy.Override)]
+    protected void DisposeInner(bool disposing)
     {
         if (disposing)
-        { 
+        {
             //Disposable Instance fields
-            var disposableFields = meta.Target.Type.Fields
-                .Select(DoField)
-                .Where(x => x.Included)
-                .OrderBy(x => x.Order)
-                .ThenBy(x => x.Field.Name)
-                .ToArray();
-
+            var disposableFields = meta.Target.Type.GetDisposableFields();
             meta.InsertComment($"Disposing {disposableFields.Length} fields...");
-
             foreach (var f in disposableFields)
             {
+                meta.InsertComment($"Disposing {f.Field.Name}.");
                 meta.InvokeTemplate(f.Template);
             }
-            
             IsDisposed = true;
         }
 
         meta.InsertComment($"Disposer aspect does not support Finalizers.");
-    }
-
-    private static FieldInfoCompileTime DoField(IField field)
-    {
-        var result = new FieldInfoCompileTime(field);
-
-        if (result.Excluded)
-            return result;
-
-        result.ExcludedByAttribute = field.Attributes.Any(x => x.Type.Is(typeof(DisposerExcludeAttribute)));
-
-        var order = (int?)field.Attributes
-            .OfAttributeType(typeof(DisposerOrderAttribute))
-            .SingleOrDefault()?.NamedArguments[nameof(DisposerOrderAttribute.Order)].Value;
-
-        result.Order =  order ?? DisposerOrderAttribute.Default;
-
-        if (result.Excluded)
-            return result;
-
-        result.Template = DisposeTemplateSelector.Instance.GetTemplate(result.Field);
-
-        return result;
     }
 }

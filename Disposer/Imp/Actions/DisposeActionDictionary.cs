@@ -10,9 +10,9 @@ namespace Mefitihe.LamaHerd.Disposer.Imp.Actions;
 public class DisposeActionDictionary : IDisposeAction
 {
     public int EvaluationOrder { get; } = 10;
-    public TemplateInvocation GetTemplateInvocation(IField field) => new(nameof(KillIt), this, arguments: new { field = field });
+    public TemplateInvocation GetTemplateInvocation(IFieldOrProperty field) => new(nameof(KillIt), this, arguments: new { field = field });
 
-    public bool CanKill(IField field)
+    public bool CanKill(IFieldOrProperty field)
     {
         var t = field.Type.ToType();
 
@@ -27,10 +27,10 @@ public class DisposeActionDictionary : IDisposeAction
     }
 
     [Template]
-    private void KillIt(IField field)
+    private void KillIt(IFieldOrProperty field)
     {
         if ((field.Value) != null)
-            foreach (IDisposable i in (field.Value).Values)
+            foreach (IDisposable i in field.Value.Values)
                 i?.Dispose();
     }
 }

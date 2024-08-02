@@ -16,7 +16,7 @@ namespace Disposer.Testables.HandCoded
 
         public int DescendentMethod22()
         {
-            if (Disposed)
+            if (IsDisposed)
                 throw new ObjectDisposedException(ToString());
 
             return 22;

@@ -2,4 +2,4 @@
 using Metalama.Framework.Aspects;
 
 //[assembly:AspectOrder(typeof(DisposerAttribute), typeof(DisposerDescendentAttribute))]
-[assembly: AspectOrder(typeof(DisposerDescendentAttribute), typeof(DisposableAttribute))]
+[assembly: AspectOrder(AspectOrderDirection.RunTime, typeof(DisposerDescendentAttribute), typeof(DisposableAttribute))]

@@ -9,12 +9,12 @@ namespace Disposer.Tests
     {
         protected override ITestableDisposable Create()
         {
-            return new DisposableByAspect(new FakeDisposable(), null, null);
+            return new DisposableByAspect(new FakeDisposable(), null!, null!);
         }
 
         protected override ITestableDisposableDescendent CreateDescendent()
         {
-            return new DisposableDescendentByAspect(new FakeDisposable(), null, null);
+            return new DisposableDescendentByAspect(new FakeDisposable(), null!, null!);
         }
     }
 }

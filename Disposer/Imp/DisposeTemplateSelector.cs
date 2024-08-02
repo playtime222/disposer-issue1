@@ -19,10 +19,8 @@ public class DisposeTemplateSelector
         _Actions = actions.OrderBy(x => x.EvaluationOrder).ToArray();
     }
 
-    public TemplateInvocation GetTemplate(IField f)
+    public TemplateInvocation? GetTemplate(IFieldOrProperty f)
     {
         return _Actions.FirstOrDefault(x => x.CanKill(f))?.GetTemplateInvocation(f);
     }
-
-
 }

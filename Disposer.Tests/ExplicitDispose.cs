@@ -8,12 +8,12 @@ namespace Disposer.Tests
     {
         protected override ITestableDisposable Create()
         {
-            return new Testables.HandCoded.HandCodedDisposable(new FakeDisposable(), null, null);
+            return new Testables.HandCoded.HandCodedDisposable(new FakeDisposable(), null!, null!);
         }
 
         protected override ITestableDisposableDescendent CreateDescendent()
         {
-            return new Testables.HandCoded.HandCodedDisposableDescendent(new FakeDisposable(), null, null);
+            return new Testables.HandCoded.HandCodedDisposableDescendent(new FakeDisposable(), null!, null!);
         }
     }
 }

@@ -7,21 +7,15 @@ using Metalama.Framework.Eligibility;
 
 namespace Mefitihe.LamaHerd.Disposer;
 
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
 public class DisposerDescendentAttribute : TypeAspect
 {
+    public ObjectDisposedExceptionThrowers Throwers { get; set; } = ObjectDisposedExceptionThrowers.Default;
+
     public override void BuildAspect(IAspectBuilder<INamedType> builder)
     {
         base.BuildAspect(builder);
-        builder.Target.Methods.Where(y => !y.IsStatic && y.Accessibility != Accessibility.Private).ForEach(y => builder.Advice.Override(y, nameof(ThrowIfDisposed)));
-    }
-
-    [Template]
-    private dynamic? ThrowIfDisposed()
-    {
-        if (meta.This.IsDisposed)
-            throw new ObjectDisposedException(meta.This.ToString());
-
-        return meta.Proceed();
+        builder.Outbound.AddThrowIfDisposed(Throwers);
     }
 
     public override void BuildEligibility(IEligibilityBuilder<INamedType> builder)
@@ -43,10 +37,8 @@ public class DisposerDescendentAttribute : TypeAspect
         if (disposing)
         {
             //Disposable Instance fields
-            var disposableFields = GetDisposableFields();
-
+            var disposableFields = meta.Target.Type.GetDisposableFields();
             meta.InsertComment($"Disposing {disposableFields.Length} fields...");
-
             foreach (var f in disposableFields)
             {
                 meta.InvokeTemplate(f.Template);
@@ -54,38 +46,5 @@ public class DisposerDescendentAttribute : TypeAspect
         }
 
         meta.Base.Dispose(disposing);
-    }
-
-    private static FieldInfoCompileTime[] GetDisposableFields()
-    {
-        return meta.Target.Type.Fields
-            .Select(DoField)
-            .Where(x => x.Included)
-            .OrderBy(x => x.Order)
-            .ThenBy(x => x.Field.Name)
-            .ToArray();
-    }
-
-    private static FieldInfoCompileTime DoField(IField field)
-    {
-        var result = new FieldInfoCompileTime(field);
-
-        if (result.Excluded)
-            return result;
-
-        result.ExcludedByAttribute = field.Attributes.Any(x => x.Type.Is(typeof(DisposerExcludeAttribute)));
-
-        var order = (int?)field.Attributes
-            .OfAttributeType(typeof(DisposerOrderAttribute))
-            .SingleOrDefault()?.NamedArguments[nameof(DisposerOrderAttribute.Order)].Value;
-
-        result.Order = order ?? DisposerOrderAttribute.Default;
-
-        if (result.Excluded)
-            return result;
-
-        result.Template = DisposeTemplateSelector.Instance.GetTemplate(result.Field);
-
-        return result;
     }
 }
