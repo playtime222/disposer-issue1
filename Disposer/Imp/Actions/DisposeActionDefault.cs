@@ -10,13 +10,13 @@ public class DisposeActionDefault : IDisposeAction
 {
     public int EvaluationOrder => 10;
     
-    public TemplateInvocation GetTemplateInvocation(IFieldOrProperty field) => new (nameof(KillIt), this, arguments: new {field = field});
+    public TemplateInvocation GetTemplateInvocation(IFieldOrProperty fieldOrProperty) => new (nameof(KillIt), this, arguments: new {fieldOrProperty});
 
     public bool CanKill(IFieldOrProperty f) => f.Type.Is(typeof(IDisposable));
 
     [Template]
-    private void KillIt(IFieldOrProperty field)
+    private void KillIt(IFieldOrProperty fieldOrProperty)
     {
-        (field.Value)?.Dispose();
+        (fieldOrProperty.Value)?.Dispose();
     }
 }

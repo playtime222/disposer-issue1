@@ -50,7 +50,7 @@ public class DisposableAttribute : TypeAspect
             meta.InsertComment($"Disposing {disposableFields.Length} fields...");
             foreach (var f in disposableFields)
             {
-                meta.InsertComment($"Disposing {f.Field.Name}.");
+                meta.InsertComment($"Disposing {f.Name}.");
                 meta.InvokeTemplate(f.Template);
             }
             IsDisposed = true;

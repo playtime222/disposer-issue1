@@ -12,7 +12,9 @@ public class ThrowIfDisposed : OverrideMethodAspect
     public override dynamic? OverrideMethod()
     {
         if (meta.This.IsDisposed) //Relies in the Disposer aspects adding this property.
+        {
             throw new ObjectDisposedException(meta.This.ToString());
+        }
         return meta.Proceed();
     }
 }
