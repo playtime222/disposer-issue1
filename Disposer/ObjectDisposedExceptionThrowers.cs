@@ -1,8 +1,8 @@
-﻿using Metalama.Framework.Aspects;
-using System;
+﻿using System;
 using System.Linq;
+using Metalama.Framework.Aspects;
 
-namespace Mefitihe.LamaHerd.Disposer.Imp;
+namespace Mefitihe.LamaHerd.Disposer;
 
 [CompileTime]
 [Flags]

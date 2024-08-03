@@ -27,18 +27,18 @@ internal static class DisposableExtensions
     {
         return t
             .FieldsAndProperties
-            //Excludes backing fields cos metalama compiler error
-            .Where(x => x.Type.Is(typeof(IDisposable)))
-            .Where(x => x.DeclarationKind == DeclarationKind.Property || (x.DeclarationKind == DeclarationKind.Field && !x.IsImplicitlyDeclared))
+            .Where(x => x.Type.Is(typeof(IDisposable))) //Duh!
+            // Exclude compiler generated property backing fields
+            .Where(x => x.DeclarationKind == DeclarationKind.Property || (x.DeclarationKind == DeclarationKind.Field && !x.IsImplicitlyDeclared)) 
             .Where(x => !x.Attributes.Any(y => y.Type.Is(typeof(DisposerExcludeAttribute))))
             .Select(x => new { fop = x, t = DisposeTemplateSelector.Instance.GetTemplate(x) })
             .Where(x => x.t != null)
-            .Select(x => new MemberInfoCompileTime(x.fop.Name, order(x.fop), x.t!))
+            .Select(x => new MemberInfoCompileTime(x.fop.Name, GetOrder(x.fop), x.t!))
             .OrderBy(x => x.Order)
             .ThenBy(x => x.Name)
             .ToArray();
 
-        int order(IFieldOrProperty fop)
+        int GetOrder(IFieldOrProperty fop)
         {
             var a = fop.Attributes
                 .OfAttributeType(typeof(DisposerOrderAttribute))
