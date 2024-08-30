@@ -9,9 +9,18 @@ namespace Disposer.Testables.Aspected
     {
         private int _Property21 = 21;
 
+        [DisposerOrder(999)]
         private readonly FakeDisposable _Disposable;
+        [DisposerOrder(-19)]
         private readonly HashSet<IDisposable> _DisposableHashSet;
+        private readonly HashSet<Left> _LeftHashSet = new();
+
+        [DisposerOrder(1001)]
         private readonly IReadOnlyDictionary<int, IDisposable> _DisposableRoDic;
+
+        [DisposerExclude]
+        private readonly IDictionary<int, IDisposable> _Dic;
+        private readonly IDictionary<int, int> _Dic2;
 
         public DisposableByAspect(FakeDisposable disposable, HashSet<IDisposable> disposableHashSet, IReadOnlyDictionary<int, IDisposable> disposableRoDic)
         {
@@ -19,6 +28,11 @@ namespace Disposer.Testables.Aspected
             _DisposableHashSet = disposableHashSet;
             _DisposableRoDic = disposableRoDic;
             _Disposable = disposable;
+
+            //IReadOnlyDictionary<,> argle = _DisposableRoDic;
+
+            IEnumerable<IDisposable> arse = _DisposableHashSet;
+            IEnumerable<IDisposable> arse2 = _LeftHashSet;
         }
 
         public int Property21
